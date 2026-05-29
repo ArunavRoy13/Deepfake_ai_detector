@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Reset & base ──────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #ffffff;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: #2454D8; color: #fff; }
+
+  ::-webkit-scrollbar { width: 4px; background: #f8fafc; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 2px; }
+}
+
+/* ── Design tokens ─────────────────────────────────────────── */
+:root {
+  --blue:    #2563eb;
+  --blue-lt: #3b82f6;
+  --red:     #ef4444;
+  --bg:      #ffffff;
+  --bg-2:    #f8fafc;
+  --bg-3:    #f1f5f9;
+  --border:  rgba(0,0,0,0.06);
+  --text-dim: #64748b;
+}
+
+/* ── Typography helpers ────────────────────────────────────── */
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.gradient-text {
+  background: linear-gradient(95deg, #f8fafc 0%, #7dd3fc 45%, #2563eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Card styles ────────────────────────────────────────────── */
+.card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.03);
+  transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+.card:hover {
+  border-color: rgba(37,99,235,0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(37,99,235,0.08);
+}
+
+/* ── Glow utility ───────────────────────────────────────────── */
+.glow-blue  { box-shadow: 0 0 40px rgba(36,84,216,0.25); }
+.glow-red   { box-shadow: 0 0 32px rgba(239,68,68,0.2); }
+.text-glow  { text-shadow: 0 0 30px rgba(36,84,216,0.5); }
+
+/* ── Section divider ───────────────────────────────────────── */
+.section-line {
+  width: 32px; height: 2px;
+  background: var(--blue);
+  margin-bottom: 16px;
+}
+
+/* ── Button styles ─────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--blue);
+  color: #fff;
+  padding: 13px 28px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  border: none; cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover {
+  background: var(--blue-lt);
+  box-shadow: 0 0 24px rgba(36,84,216,0.4);
+}
+
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: transparent;
+  color: #475569;
+  padding: 13px 24px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  border: 1px solid rgba(0,0,0,0.15); cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.btn-outline:hover { border-color: rgba(0,0,0,0.4); color: #0f172a; }
+
+/* ── Process step connector ─────────────────────────────────── */
+.step-connector {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(36,84,216,0.4), rgba(36,84,216,0.05));
+}
+
+/* ── Confidence ring animation ───────────────────────────────── */
+@keyframes drawArc {
+  from { stroke-dashoffset: 502; }
+  to   { stroke-dashoffset: 44; }
+}
+
+/* ── Hero Image Animation ───────────────────────────────────── */
+@keyframes hero-pan {
+  0% { transform: scale(1.15) translateX(3%); }
+  100% { transform: scale(1.15) translateX(-3%); }
+}
+
+.hero-pan {
+  animation: hero-pan 25s ease-in-out infinite alternate;
+}
+.arc-draw { animation: drawArc 1.5s ease-out 0.4s forwards; }
+
+/* ── Gradient backgrounds ────────────────────────────────────── */
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 70% at 70% 50%, rgba(37,99,235,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 20% 50%, rgba(99,102,241,0.05) 0%, transparent 50%),
+    #ffffff;
+}
+
+.section-glow-blue {
+  background:
+    radial-gradient(ellipse 60% 60% at 80% 50%, rgba(37,99,235,0.06) 0%, transparent 65%),
+    #f8fafc;
+}
+
+/* ── Waveform bar animation ──────────────────────────────────── */
+@keyframes waveBar {
+  0%,100% { transform: scaleY(0.35); }
+  50%      { transform: scaleY(1); }
+}
+.wave-bar { transform-origin: center; animation: waveBar 1s ease-in-out infinite; }
+
+/* ── Pulse dot ───────────────────────────────────────────────── */
+@keyframes pulseDot {
+  0%,100% { opacity:1; transform: scale(1); }
+  50%     { opacity:0.4; transform: scale(0.7); }
+}
+.pulse-dot { animation: pulseDot 1.8s ease-in-out infinite; }
+
+/* ── Scan line ───────────────────────────────────────────────── */
+@keyframes scanLine {
+  0%   { transform: translateX(-120%); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateX(120%); opacity: 0; }
+}
+.scan-effect::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(36,84,216,0.25), transparent);
+  animation: scanLine 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── Fade-up animation ────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.7s ease-out forwards; }
