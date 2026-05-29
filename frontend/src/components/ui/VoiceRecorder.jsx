@@ -175,7 +175,8 @@ const VoiceRecorder = ({ onStateChange }) => {
       const formData = new FormData();
       formData.append('file', audioBlob, 'live_recording.webm');
       
-      const response = await fetch('http://127.0.0.1:8000/api/v1/detect', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+      const response = await fetch(`${apiUrl}/api/v1/detect`, {
         method: 'POST',
         body: formData,
       });

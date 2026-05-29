@@ -82,7 +82,8 @@ const VoiceUpload = () => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/v1/detect', formData, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+      const response = await axios.post(`${apiUrl}/api/v1/detect`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
